@@ -1,8 +1,10 @@
 import { Button, Flex, Input, Space, Typography } from "antd"
 import { CSSProperties, FC, useEffect, useState } from "react"
 import useTodoStore from "./store/todoStore"
-import { Todo } from "./types/todolist.types"
+import { EditModalStateProps, Todo } from "./types/todolist.types"
 import TodoItem from "./components/TodoItem"
+import EditModal from "./components/EditModal"
+// import EditModal from "./components/EditModal"
 
 const containerStyle: CSSProperties = {
     minHeight: "100vh",
@@ -20,11 +22,15 @@ const formContainerStyle: CSSProperties = {
 const App: FC = () => {
     const [todoInput, setTodoInput] = useState("")
 
+    const [editModalState, setEditModalState] = useState<EditModalStateProps>({
+        open: false,
+        edit: null,
+    })
+
     const { list, addTodo } = useTodoStore((state) => state)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        // console.log(todoInput)
         if (todoInput) {
             const value = {
                 id: crypto.randomUUID(),
@@ -35,6 +41,14 @@ const App: FC = () => {
             addTodo(value)
         }
         setTodoInput("")
+    }
+
+    const openEditModal = () => {
+        setEditModalState((prev) => ({ ...prev, open: true }))
+    }
+
+    const closeEditModal = () => {
+        setEditModalState((prev) => ({ ...prev, open: false }))
     }
 
     useEffect(() => {
@@ -57,10 +71,15 @@ const App: FC = () => {
                 </form>
                 <div>
                     {list.map((todo: Todo) => (
-                        <TodoItem key={todo.id} todo={todo} />
+                        <TodoItem
+                            key={todo.id}
+                            todo={todo}
+                            openEditModal={openEditModal}
+                        />
                     ))}
                 </div>
             </div>
+            <EditModal open={editModalState.open} closeModal={closeEditModal} />
         </Flex>
     )
 }

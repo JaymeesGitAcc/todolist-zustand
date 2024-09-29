@@ -5,6 +5,7 @@ export interface TodoStoreProps {
     list: Todo[]
     addTodo: (payload: Todo) => void
     changeCompleted: (id: string) => void
+    updateTodo: (payload: Todo) => void
 }
 
 const useTodoStore = create<TodoStoreProps>((set) => ({
@@ -14,6 +15,14 @@ const useTodoStore = create<TodoStoreProps>((set) => ({
         set((state) => ({
             list: state.list.map((todo) =>
                 todo.id === id ? { ...todo, completed: !todo.completed } : todo
+            ),
+        })),
+    updateTodo: (payload) =>
+        set((state) => ({
+            list: state.list.map((todo) =>
+                todo.id === payload.id
+                    ? { ...todo, title: payload.title }
+                    : todo
             ),
         })),
 }))

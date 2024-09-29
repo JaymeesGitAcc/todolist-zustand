@@ -3,3 +3,8 @@ export interface Todo {
     title: string
     completed: boolean
 }
+
+export interface EditModalStateProps {
+    open: boolean
+    edit: Todo | null
+}

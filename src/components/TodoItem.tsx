@@ -2,12 +2,14 @@ import { Button, Checkbox, Flex, Typography } from "antd"
 import React from "react"
 import useTodoStore from "../store/todoStore"
 import { Todo } from "../types/todolist.types"
+// import { EditModalStateProps } from "../App"
 
 interface TodoItemProps {
     todo: Todo
+    openEditModal: () => void
 }
 
-const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
+const TodoItem: React.FC<TodoItemProps> = ({ todo, openEditModal }) => {
     const changeCompleted = useTodoStore((state) => state.changeCompleted)
 
     const handleChange = (todoid: string) => {
@@ -38,7 +40,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
                     marginBlock: "10px",
                 }}
             >
-                <Button color="primary" variant="solid">
+                <Button color="primary" variant="solid" onClick={openEditModal}>
                     Edit
                 </Button>
                 <Button color="danger" variant="solid">

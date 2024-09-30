@@ -2,7 +2,6 @@ import { Button, Checkbox, Flex, Typography } from "antd"
 import React from "react"
 import useTodoStore from "../store/todoStore"
 import { EditValueProps, Todo } from "../types/todolist.types"
-// import { EditModalStateProps } from "../App"
 
 interface TodoItemProps {
     todo: Todo

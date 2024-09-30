@@ -118,6 +118,17 @@ const App: FC = () => {
                             showModal={showModal}
                         />
                     ))}
+                    {!list.length && (
+                        <Typography
+                            style={{
+                                textAlign: "center",
+                                marginBlock: "10px",
+                                color: "rgba(0, 0, 0, 0.24)",
+                            }}
+                        >
+                            ---List is empty---
+                        </Typography>
+                    )}
                 </div>
             </div>
             <DeleteModal

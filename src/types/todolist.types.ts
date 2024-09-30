@@ -4,7 +4,7 @@ export interface Todo {
     completed: boolean
 }
 
-export interface EditModalStateProps {
-    open: boolean
-    edit: Todo | null
+export interface EditValueProps {
+    id: string
+    title: string
 }

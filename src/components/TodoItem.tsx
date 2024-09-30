@@ -1,15 +1,22 @@
 import { Button, Checkbox, Flex, Typography } from "antd"
 import React from "react"
 import useTodoStore from "../store/todoStore"
-import { Todo } from "../types/todolist.types"
+import { EditValueProps, Todo } from "../types/todolist.types"
 // import { EditModalStateProps } from "../App"
 
 interface TodoItemProps {
     todo: Todo
-    openEditModal: () => void
+    setEditingValue: (val: EditValueProps) => void
+    setTodoInput: (val: string) => void
+    showModal: (todo: Todo) => void
 }
 
-const TodoItem: React.FC<TodoItemProps> = ({ todo, openEditModal }) => {
+const TodoItem: React.FC<TodoItemProps> = ({
+    todo,
+    setEditingValue,
+    setTodoInput,
+    showModal,
+}) => {
     const changeCompleted = useTodoStore((state) => state.changeCompleted)
 
     const handleChange = (todoid: string) => {
@@ -40,10 +47,25 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, openEditModal }) => {
                     marginBlock: "10px",
                 }}
             >
-                <Button color="primary" variant="solid" onClick={openEditModal}>
+                <Button
+                    color="primary"
+                    variant="solid"
+                    onClick={() => {
+                        setTodoInput(todo.title)
+                        setEditingValue({
+                            id: todo.id,
+                            title: todo.title,
+                        })
+                    }}
+                    disabled={todo.completed}
+                >
                     Edit
                 </Button>
-                <Button color="danger" variant="solid">
+                <Button
+                    color="danger"
+                    variant="solid"
+                    onClick={() => showModal(todo)}
+                >
                     Del
                 </Button>
             </Flex>

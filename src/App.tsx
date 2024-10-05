@@ -1,5 +1,5 @@
 import { Button, Flex, Input, Space, Typography } from "antd"
-import { CSSProperties, FC, useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import useTodoStore from "./store/todoStore"
 import { EditValueProps, Todo } from "./types/todolist.types"
 import toast, { Toaster } from "react-hot-toast"

@@ -6,19 +6,6 @@ import toast, { Toaster } from "react-hot-toast"
 import DeleteModal from "./components/DeleteModal"
 import ShowList from "./components/ShowList"
 
-const containerStyle: CSSProperties = {
-    minHeight: "100vh",
-    backgroundColor: "#494949",
-}
-
-const formContainerStyle: CSSProperties = {
-    width: "500px",
-    minHeight: "200px",
-    padding: "22px",
-    borderRadius: "10px",
-    backgroundColor: "#fff",
-}
-
 const App: FC = () => {
     const [todoInput, setTodoInput] = useState("")
     const [editingValue, setEditingValue] = useState<null | EditValueProps>(
@@ -91,9 +78,12 @@ const App: FC = () => {
     }, [list])
 
     return (
-        <Flex style={containerStyle} justify="center" align="center">
+        <Flex
+            justify="center"
+            className="min-h-screen bg-[#494949] p-2 md:items-center"
+        >
             <Toaster />
-            <div style={formContainerStyle}>
+            <div className="bg-white p-4 rounded-lg md:w-[500px]">
                 <Typography.Title level={3}>My Todos</Typography.Title>
                 <form onSubmit={handleSubmit}>
                     <Space.Compact size="large" style={{ width: "100%" }}>

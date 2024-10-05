@@ -26,14 +26,15 @@ const TodoItem: React.FC<TodoItemProps> = ({
             <Checkbox
                 checked={todo.completed}
                 onChange={() => handleChange(todo.id)}
+                className="todo-checkbox"
             >
                 <Typography.Text
                     style={{
-                        fontSize: "17px",
                         textDecoration: todo.completed
                             ? "line-through"
                             : undefined,
                     }}
+                    className="md:text-lg"
                 >
                     {todo.title}
                 </Typography.Text>
@@ -56,6 +57,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
                             title: todo.title,
                         })
                     }}
+                    className="p-2 text-[12px] md:p-4 md:text-[14px]"
                     disabled={todo.completed}
                 >
                     Edit
@@ -64,6 +66,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
                     color="danger"
                     variant="solid"
                     onClick={() => showModal(todo)}
+                    className="p-2 text-[12px] md:p-4 md:text-[14px]"
                 >
                     Del
                 </Button>

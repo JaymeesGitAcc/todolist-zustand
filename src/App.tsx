@@ -5,6 +5,7 @@ import { EditValueProps, Todo } from "./types/todolist.types"
 import TodoItem from "./components/TodoItem"
 import toast, { Toaster } from "react-hot-toast"
 import DeleteModal from "./components/DeleteModal"
+import ShowList from "./components/ShowList"
 
 const containerStyle: CSSProperties = {
     minHeight: "100vh",
@@ -87,7 +88,6 @@ const App: FC = () => {
     }
 
     useEffect(() => {
-        console.log(list)
         localStorage.setItem("ts-zustand-todos", JSON.stringify(list))
     }, [list])
 
@@ -108,28 +108,7 @@ const App: FC = () => {
                         </Button>
                     </Space.Compact>
                 </form>
-                <div>
-                    {list.map((todo: Todo) => (
-                        <TodoItem
-                            key={todo.id}
-                            todo={todo}
-                            setEditingValue={setEditingValue}
-                            setTodoInput={setTodoInput}
-                            showModal={showModal}
-                        />
-                    ))}
-                    {!list.length && (
-                        <Typography
-                            style={{
-                                textAlign: "center",
-                                marginBlock: "10px",
-                                color: "rgba(0, 0, 0, 0.24)",
-                            }}
-                        >
-                            ---List is empty---
-                        </Typography>
-                    )}
-                </div>
+                <ShowList {...{ setEditingValue, showModal, setTodoInput }} />
             </div>
             <DeleteModal
                 open={isModalOpen}

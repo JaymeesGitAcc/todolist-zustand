@@ -11,6 +11,7 @@ export interface TodoStoreProps {
     changeCompleted: (id: string) => void
     updateTodo: (payload: EditValueProps) => void
     deleteTodo: (id: string) => void
+    deleteAll: () => void
 }
 
 const useTodoStore = create<TodoStoreProps>((set) => ({
@@ -32,6 +33,7 @@ const useTodoStore = create<TodoStoreProps>((set) => ({
         })),
     deleteTodo: (id) =>
         set((state) => ({ list: state.list.filter((todo) => todo.id !== id) })),
+    deleteAll: () => set({ list: [] }),
 }))
 
 export default useTodoStore
